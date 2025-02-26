@@ -1,6 +1,7 @@
 <template>
   <div>
     <Hero />
+    <FeedbackSection />
     <ContactSection />
     <GallerySection />
     <QuiSommesNous />
@@ -9,6 +10,7 @@
 
 <script setup>
 import Hero from '~/components/sections/Hero.vue';
+import FeedbackSection from '~/components/sections/FeedbackSection.vue';
 import GallerySection from '~/components/sections/GallerySection.vue';
 import QuiSommesNous from '~/components/sections/QuiSommesNous.vue';
 import ContactSection from '~/components/sections/ContactSection.vue';
