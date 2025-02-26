@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="text-red-500">Accueil</h1>
     <Home />
     <GallerySection />
     <QuiSommesNous />
