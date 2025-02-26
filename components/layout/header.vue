@@ -1,6 +1,28 @@
 <script setup>
 import arrowSvg from '../../assets/images/guidance_up-arrow.svg'
 import logoSvg from '../../assets/images/logo-locta.svg'
+
+import { ref } from 'vue';
+const logo = ref(null)
+
+onMounted(() => {
+  document.onscroll = function(){ 
+  var pos = getVerticalScrollPercentage(document.body)
+  if (logo.value) { 
+      if (pos > 57) {    
+        logo.value.style.filter = "invert(1)";
+      } else {
+        logo.value.style.filter = "invert(0)";
+      }
+    }
+}
+
+function getVerticalScrollPercentage( elm ){
+  var p = elm.parentNode
+  return (elm.scrollTop || p.scrollTop) / (p.scrollHeight - p.clientHeight ) * 100
+}  
+})
+
 </script>
 
 <style>
@@ -14,10 +36,9 @@ import logoSvg from '../../assets/images/logo-locta.svg'
 </style>
 
 <template>
-  <nav class="w-full flex fixed px-4 z-10">
-    <div class="w-[50%] bg-transparent">
-      <img :src="logoSvg" alt="">
-    </div>
+  <img ref="logo" class="fixed z-10" :src="logoSvg" alt="">
+  <nav class="w-full flex fixed pr-4 h-20">
+    <div class="w-[50%] bg-white"></div>
     <div class="flex w-[50%] bg-white justify-between items-center py-2 px-4 poppins-light">
       <div class="flex space-x-8 ml-8">
         <a class="cursor-pointer">Projet</a>
