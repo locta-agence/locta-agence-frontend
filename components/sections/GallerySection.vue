@@ -1,6 +1,5 @@
 <template>
   <section class="bg-white">
-    <h1 class="text-red-500">Gallery</h1>
     <div class="container mx-auto w-full">
       <h2 class="text-2xl font-medium text-gray-800 mb-8 text-center">Galerie</h2>
 
