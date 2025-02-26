@@ -1,13 +1,15 @@
 <template>
   <div>
-    <Home />
+    <Hero />
+    <ContactSection />
     <GallerySection />
     <QuiSommesNous />
   </div>
 </template>
 
 <script setup>
-import QuiSommesNous from '~/components/sections/QuiSommesNous.vue';
+import Hero from '~/components/sections/Hero.vue';
 import GallerySection from '~/components/sections/GallerySection.vue';
-import Home from '~/components/sections/Home.vue';
+import QuiSommesNous from '~/components/sections/QuiSommesNous.vue';
+import ContactSection from '~/components/sections/ContactSection.vue';
 </script>

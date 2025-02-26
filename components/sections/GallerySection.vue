@@ -1,8 +1,6 @@
 <template>
   <section class="bg-white">
-    <div class="container mx-auto w-full">
-      <h2 class="text-2xl font-medium text-gray-800 mb-8 text-center">Galerie</h2>
-
+    <div class="p-2 mx-auto w-full">
       <div class="parent">
         <div
           v-for="(image, index) in images"

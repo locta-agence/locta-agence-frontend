@@ -1,38 +1,31 @@
 <template>
-  <section class="bg-white">
+  <section class="py-24 bg-white text-center">
+    <div class="container mx-auto px-6 lg:px-16">
+      <p class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+        locta.agence@mail.com
+      </p>
+
+      <p class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+        @lo.cta
+      </p>
+
+      <p class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+        Locta agence
+      </p>
+
+      <a
+        href="mailto:locta.agence@mail.com"
+        class="inline-flex items-center px-6 py-3 border border-gray-900 text-gray-900 font-medium rounded-full hover:bg-gray-900 hover:text-white transition-all"
+      >
+        Contact
+        <span class="ml-2">&rarr;</span>
+      </a>
+    </div>
   </section>
 </template>
 
 <script setup>
-const images = [
-  { src: '/images/gallery1.png', alt: 'Image 1' },
-  { src: '/images/gallery2.png', alt: 'Image 2' },
-  { src: '/images/gallery3.png', alt: 'Image 3' },
-  { src: '/images/gallery4.png', alt: 'Image 4' },
-  { src: '/images/gallery5.png', alt: 'Image 5' },
-  { src: '/images/gallery6.png', alt: 'Image 6' },
-  { src: '/images/gallery7.png', alt: 'Image 7' },
-  { src: '/images/gallery8.png', alt: 'Image 8' },
-];
 </script>
 
 <style scoped>
-.parent {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  grid-gap: 6px;
-}
-
-/* Ligne 1 */
-.div1 { grid-area: 1 / 1 / 3 / 3; }
-.div2 { grid-area: 1 / 3 / 3 / 5; }
-.div3 { grid-area: 1 / 5 / 3 / 7; }
-.div4 { grid-area: 1 / 7 / 2 / 9; }
-.div5 { grid-area: 2 / 7 / 3 / 9; }
-
-/* Ligne 2 */
-.div6 { grid-area: 3 / 1 / 5 / 4; }
-.div7 { grid-area: 3 / 4 / 5 / 6; }
-.div8 { grid-area: 3 / 6 / 5 / 9; }
 </style>
