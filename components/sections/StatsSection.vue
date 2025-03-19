@@ -1,6 +1,6 @@
 <template>
-  <section class="bg-black text-white py-16 px-6 rounded-3xl max-w-5xl mx-auto">
-    <div class="grid grid-cols-4 gap-6 text-center">
+  <section class="bg-black text-white py-32 rounded-3xl m-2 flex flex-col justify-center items-center">
+    <div class="flex gap-16 text-center">
       <div v-for="(stat, index) in stats" :key="index">
         <p class="text-4xl font-bold">{{ stat.value }}</p>
         <p class="text-lg">{{ stat.label }}</p>

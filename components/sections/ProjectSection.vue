@@ -1,6 +1,6 @@
 <template>
   <section class="py-16 bg-white">
-    <div class="container mx-auto px-6 lg:px-16">
+    <div class="container mx-auto">
       <!-- En-tête de la section -->
       <div class="flex justify-between items-center mb-8">
         <h2 class="text-5xl font-bold text-black">Nos derniers projets</h2>
