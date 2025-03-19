@@ -1,7 +1,7 @@
 <template>
   <section class="py-16 bg-white">
     <div class="container mx-auto">
-      <!-- En-tête de la section -->
+
       <div class="flex justify-between items-center mb-8">
         <h2 class="text-5xl font-bold text-black">Nos derniers projets</h2>
         <a
@@ -12,7 +12,6 @@
         </a>
       </div>
 
-      <!-- Filtres -->
       <div class="flex flex-wrap gap-3 mb-10">
         <button
           v-for="(filter, index) in filters"
@@ -29,9 +28,9 @@
         </button>
       </div>
 
-      <!-- Contenu principal -->
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <!-- Grande image -->
+      
         <div class="relative overflow-hidden rounded-xl main-image">
           <img
             :src="projects[0].image"
@@ -45,7 +44,6 @@
           </div>
         </div>
 
-        <!-- Texte -->
         <div class="flex flex-col">
           <div class="mb-4 mt-auto flex items-center justify-between">
             <h3 class="text-4xl font-bold text-black mb-2">
@@ -66,7 +64,6 @@
             {{ projects[0].description }}
           </p>
 
-          <!-- Petite galerie -->
           <div class="grid grid-cols-2 gap-4 mt-auto">
             <div
               v-for="(image, idx) in projects[0].extraImages"
