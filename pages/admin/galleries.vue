@@ -1,51 +1,51 @@
 <template>
-  <div class="container">
-    <h1>Gestion des Galeries</h1>
+  <div class="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
+    <h1 class="text-3xl font-bold mb-6">Gestion des Galeries</h1>
 
-    <!-- Formulaire pour ajouter une galerie -->
-    <form @submit.prevent="addGallery" class="form-container">
-      <input v-model="newGallery.url" placeholder="URL de l'image/vidéo" required />
+    <!-- Formulaire d'ajout -->
+    <form @submit.prevent="addGallery" class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+      <input v-model="newGallery.url" placeholder="URL de l'image/vidéo" required class="w-full p-2 border rounded mb-3" />
 
-      <div class="form-group">
-        <label for="projectSelect">Associer à un projet</label>
-        <select v-model="newGallery.idProject" id="projectSelect" required>
+      <div class="flex flex-col bg-gray-50 p-2 rounded mb-2">
+        <label for="projectSelect" class="mb-1">Associer à un projet</label>
+        <select v-model="newGallery.idProject" id="projectSelect" required class="p-2 border rounded">
           <option v-for="project in projects" :key="project._id" :value="project._id">
             {{ project.name }}
           </option>
         </select>
       </div>
 
-      <label class="checkbox-label">
-        <input v-model="newGallery.isVideo" type="checkbox" />
-        Vidéo
-      </label>
+      <div class="flex items-center space-x-2 bg-gray-50 p-2 rounded mb-2">
+        <label class="mr-2">Vidéo</label>
+        <input v-model="newGallery.isVideo" type="checkbox" class="w-5 h-5" />
+      </div>
 
-      <button type="submit" class="add-button">Ajouter ➕</button>
+      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Ajouter ➕</button>
     </form>
 
     <!-- Tableau des galeries -->
-    <table>
-      <thead>
+    <table class="w-full max-w-3xl mt-6 bg-white shadow-md rounded-lg overflow-hidden">
+      <thead class="bg-gray-200">
         <tr>
-          <th>URL</th>
-          <th>Vidéo</th>
-          <th>Actions</th>
+          <th class="p-3 text-left">URL</th>
+          <th class="p-3 text-left">Vidéo</th>
+          <th class="p-3 text-left">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="gallery in galleries" :key="gallery._id">
-          <td>
-            <input v-if="editingId === gallery._id" v-model="gallery.url" />
+        <tr v-for="gallery in galleries" :key="gallery._id" class="border-b hover:bg-gray-100">
+          <td class="p-3">
+            <input v-if="editingId === gallery._id" v-model="gallery.url" class="w-full p-1 border rounded" />
             <span v-else>{{ gallery.url }}</span>
           </td>
-          <td>
-            <input v-if="editingId === gallery._id" type="checkbox" v-model="gallery.isVideo" />
+          <td class="p-3">
+            <input v-if="editingId === gallery._id" type="checkbox" v-model="gallery.isVideo" class="w-5 h-5" />
             <span v-else>{{ gallery.isVideo ? 'Oui' : 'Non' }}</span>
           </td>
-          <td>
-            <button v-if="editingId === gallery._id" @click="saveGallery(gallery)" class="edit-button">💾</button>
-            <button v-else @click="editingId = gallery._id" class="edit-button">✏️</button>
-            <button @click="deleteGallery(gallery._id)" class="delete-button">🗑</button>
+          <td class="p-3 flex space-x-2">
+            <button v-if="editingId === gallery._id" @click="saveGallery(gallery)" class="bg-green-500 text-white p-2 rounded">💾</button>
+            <button v-else @click="editingId = gallery._id" class="bg-blue-500 text-white p-2 rounded">✏️</button>
+            <button @click="deleteGallery(gallery._id)" class="bg-red-500 text-white p-2 rounded">🗑</button>
           </td>
         </tr>
       </tbody>
@@ -56,18 +56,12 @@
 <script setup>
 import { ref, onMounted } from "vue";
 
-definePageMeta({
-  layout: "admin",
-});
+definePageMeta({ layout: "admin" });
 
 const galleries = ref([]);
 const projects = ref([]);
 const editingId = ref(null);
-const newGallery = ref({
-  url: "",
-  isVideo: false,
-  idProject: "", // Ajout pour éviter un bug si non sélectionné
-});
+const newGallery = ref({ url: "", isVideo: false, idProject: "" });
 
 const fetchProjects = async () => {
   try {
@@ -94,8 +88,7 @@ const addGallery = async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newGallery.value),
     });
-    const createdGallery = await res.json();
-    galleries.value.push(createdGallery);
+    galleries.value.push(await res.json());
     newGallery.value = { url: "", isVideo: false, idProject: "" };
   } catch (error) {
     console.error("Erreur lors de l'ajout de la galerie :", error);
@@ -127,118 +120,3 @@ const deleteGallery = async (id) => {
 onMounted(fetchGalleries);
 onMounted(fetchProjects);
 </script>
-
-<style scoped>
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f4f4f4;
-  padding: 20px;
-}
-
-h1 {
-  margin-bottom: 30px;
-  color: #333;
-  font-size: 32px;
-  text-align: center;
-}
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 450px;
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-input, select, button {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  width: 100%;
-}
-
-.add-button {
-  background-color: #1e90ff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.add-button:hover {
-  background-color: #007acc;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-table {
-  width: 90%;
-  max-width: 900px;
-  margin-top: 20px;
-  border-collapse: collapse;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 12px;
-  text-align: left;
-  font-size: 16px;
-}
-
-th {
-  background-color: #f4f4f4;
-  color: #333;
-}
-
-td {
-  background-color: #fff;
-}
-
-.edit-button {
-  background-color: #28a745;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.edit-button:hover {
-  background-color: #218838;
-}
-
-.delete-button {
-  background-color: #dc3545;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.delete-button:hover {
-  background-color: #c82333;
-}
-</style>
