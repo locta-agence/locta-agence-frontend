@@ -51,7 +51,7 @@ onMounted(() => {
     <img ref="logo" class="fixed z-10 invert md:invert-0" :src="logoSvg" alt="">
 
     <!-- Navigation -->
-    <nav class="w-full flex fixed md:pr-4 h-20">
+    <nav class="w-full flex fixed h-20">
       <div class="w-[50%] bg-white"></div>
       
       <!-- Contenu de la navigation (Menu desktop) -->
