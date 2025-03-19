@@ -55,13 +55,22 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import Cookies from 'js-cookie';
+import { useRouter } from 'vue-router';
 
 definePageMeta({ layout: "admin" });
-
+const router = useRouter();
 const galleries = ref([]);
 const projects = ref([]);
 const editingId = ref(null);
 const newGallery = ref({ url: "", isVideo: false, idProject: "" });
+
+onMounted(() => {
+  const token = Cookies.get('auth_token');
+  if (!token) {
+    router.push('/connexion');
+  }
+});
 
 const fetchProjects = async () => {
   try {

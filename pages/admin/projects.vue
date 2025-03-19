@@ -71,15 +71,25 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import Cookies from 'js-cookie';
+import { useRouter } from 'vue-router';
+
 
 definePageMeta({ layout: "admin" });
-
+const router = useRouter();
 const projects = ref([]);
 const editingId = ref(null);
 const newProject = ref({ name: "", rating: [] });
 const showEditModal = ref(false);
 const showDeleteModal = ref(false);
 const selectedProject = ref(null);
+
+onMounted(() => {
+  const token = Cookies.get('auth_token');
+  if (!token) {
+    router.push('/connexion');
+  }
+});
 
 const fetchProjects = async () => {
   try {

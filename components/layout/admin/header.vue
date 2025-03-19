@@ -6,9 +6,6 @@
           <NuxtLink to="/admin/projects">Projets</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/admin/users">Utilisateurs</NuxtLink>
-        </li>
-        <li>
           <NuxtLink to="/admin/galleries">Galeries</NuxtLink>
         </li>
       </ul>
