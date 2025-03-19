@@ -1,5 +1,7 @@
 # Nuxt Minimal Starter
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6812a9b6-b9b3-46cc-8781-beb7feec44f7/deploy-status)](https://app.netlify.com/sites/locta-agence/deploys)
+
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
