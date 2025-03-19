@@ -22,15 +22,22 @@
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
   import Cookies from 'js-cookie';
-  
+  definePageMeta({ layout: "noHeader" });
   const name = ref('');
   const password = ref('');
   const errorMessage = ref('');
   const router = useRouter();
+
+  onMounted(() => {
+  const token = Cookies.get('auth_token');
+  if (token) {
+    router.push('/admin/projects');
+  }
+});
   
   const login = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/login', {
+      const res = await fetch('http://localhost:3001/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name.value, password: password.value })
@@ -43,7 +50,7 @@
       }
       
       Cookies.set('auth_token', data.token, { secure: true, sameSite: 'Strict', expires: 1 });
-      router.push('/projets');
+      router.push('/admin/projects');
     } catch (error) {
       errorMessage.value = error.message;
     }
