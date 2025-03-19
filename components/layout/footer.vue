@@ -1,3 +1,8 @@
+<script setup>
+import instagram from "../../assets/images/instagram.svg"
+import tiktok from "../../assets/images/tiktok.svg"
+</script>
+
 <template>
   <div class="bg-black text-white p-5 w-full flex md:flex-col">
     <!-- Left Side -->
@@ -22,7 +27,14 @@
           <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-5 text-start">
             <li>locta.agence@mail.com</li>
             <li>07 82 38 28 49</li>
-            <li>INSTA</li>
+            <li class="flex">
+              <a href="">
+                <img :src="instagram" alt="">
+              </a>
+              <a href="">
+                <img :src="tiktok" alt="">
+              </a>
+            </li>
           </ul>
           <div class="flex w-full md:hidden flex-col md:flex-row md:space-x-5 text-xs text-start">
             <p>Politique de confidentialité</p>
