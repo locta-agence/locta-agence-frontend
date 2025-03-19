@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black text-white flex flex-wrap p-10">
+  <div class="bg-black text-white hidden flex-wrap p-10">
     <!-- Left Side -->
     <div class="w-1/3 flex flex-wrap justify-center items-center">
       <img src="~/assets/images/logo-white.svg" alt="Logo" />
@@ -32,5 +32,3 @@
     </div>
   </div>
 </template>
-
-<style scoped></style>

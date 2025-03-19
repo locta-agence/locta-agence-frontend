@@ -1,13 +1,21 @@
 <script setup>
+import mobileImgHomepage from '../../assets/images/img_homepage.svg'
+import { ref } from "vue";
+
+const activeIndex = ref(null); // Stocke l'index de l'élément ouvert
+
+const toggleAccordion = (index) => {
+    activeIndex.value = activeIndex.value === index ? null : index;
+};
 
 const links = [
-    { title: "Creation de sites web", link: "" },
-    { title: "Direction artistique", link: "" },
-    { title: "Captation photo et video", link: "" },
-    { title: "Communication", link: "" },
-    { title: "Reportage evenement", link: "" },
-    { title: "Organisation evénement", link: "" },
-    { title: "Clips vidéo", link: "" },
+    { title: "Creation de sites web", description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non excepturi ea dolores velit pariatur ducimus distinctio voluptatem error ad. Nemo voluptas perspiciatis eos cum debitis molestiae quo corrupti est eius." },
+    { title: "Direction artistique", description: "artistique" },
+    { title: "Captation photo et video", description: "artistique" },
+    { title: "Communication", description: "artistique" },
+    { title: "Reportage evenement", description: "artistique" },
+    { title: "Organisation evénement", description: "artistique" },
+    { title: "Clips vidéo", description: "artistique" },
 ]
 </script>
 
@@ -49,7 +57,8 @@ const links = [
 
 <template>
     <div class="w-full h-full flex">
-        <div class="h-screen top-2 my-2 w-1/2 locta-bg bg-cover bg-center sticky rounded-xl mr-6 ml-2"></div>
+        <img class="h-screen top-2 my-2 md:w-1/2 locta-bg bg-cover bg-center sticky rounded-xl mr-6 ml-2"
+            :src="mobileImgHomepage" alt="">
         <div class="w-1/2 right-0 flex justify-center">
             <div class="h-full flex flex-col space-y-28 pr-10">
                 <div class="h-[90vh] flex flex-col space-y-20">
@@ -58,19 +67,36 @@ const links = [
                     </div>
                     <div class="flex flex-col p-5">
                         <p class="text-sm font-mono">Made in Lyon</p>
-                        <h3 class="text-6xl boogybrut-medium border-spacing-1">Agence creative ancree dans la culture urbaine</h3>
+                        <h3 class="text-6xl boogybrut-medium border-spacing-1">Agence creative ancree dans la culture
+                            urbaine</h3>
                     </div>
                 </div>
                 <div class="space-y-20 p-5">
                     <h2 class="text-7xl boogybrut-medium">Nos expertises</h2>
                     <div class="h-full pb-5">
-                        <a v-for="item in links" class="text-xl flex items-center boogybrut-medium border-b py-7">
-                            <span class="text-xl boogybrut-light mr-5">[ 0{{ links.indexOf(item) + 1 }} ]</span>
-                            <h2 class="text-3xl">{{ item.title }}</h2>
-                        </a>
+                        <div v-for="(item, index) in links" :key="index"
+                            class="text-xl flex items-center boogybrut-medium border-b py-7">
+                            <div>
+                                <span class="text-xl boogybrut-light mr-5">[ 0{{ index + 1 }} ]</span>
+                                <button @click="toggleAccordion(index)" class="text-3xl">
+                                    <span>{{ item.title }}</span>
+                                </button>
+
+                                <div v-show="activeIndex === index"
+                                    class="overflow-hidden transition-all duration-300 ease-in-out w-full"
+                                    :style="{ maxHeight: activeIndex === index ? '200px' : '0px' }">
+                                    <p class="mt-10 bg-white border-gray-300 text-md boogybrut-light">
+                                        {{ item.description }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="md:hidden flex justify-center items-center">
+        <img class="" :src="mobileImgHomepage" alt="">
     </div>
 </template>
