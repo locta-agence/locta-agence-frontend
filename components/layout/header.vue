@@ -14,7 +14,7 @@ const toggleMenu = () => {
 onMounted(() => {
   const windowWidth = ref(window.innerWidth)    
   document.onscroll = function () {
-    let invertIndex = 57
+    let invertIndex = 38
     let pos = getVerticalScrollPercentage(document.body)
     if(windowWidth.value < '1000') invertIndex = -10
 
