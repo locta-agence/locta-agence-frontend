@@ -2,8 +2,12 @@
 export default {
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      maxHeight: {
+        xxl: "700px",
+      },
+    },
   },
   plugins: [],
-}
+};
 
