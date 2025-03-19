@@ -13,13 +13,10 @@ const toggleMenu = () => {
 
 onMounted(() => {
   const windowWidth = ref(window.innerWidth)    
-  if(windowWidth.value < '1000') 
-    logo.value.style.filter = "invert(1)"
-  
   document.onscroll = function () {
     let invertIndex = 57
     let pos = getVerticalScrollPercentage(document.body)
-    if(windowWidth.value < '1000') invertIndex = 0
+    if(windowWidth.value < '1000') invertIndex = -10
 
     if (logo.value) {
       if (pos >= invertIndex) {
@@ -51,7 +48,7 @@ onMounted(() => {
 <template>
   <header>
     <!-- Logo -->
-    <img ref="logo" class="fixed z-10" :src="logoSvg" alt="">
+    <img ref="logo" class="fixed z-10 invert md:invert-0" :src="logoSvg" alt="">
 
     <!-- Navigation -->
     <nav class="w-full flex fixed md:pr-4 h-20">
