@@ -77,15 +77,15 @@ onMounted(() => {
         <!-- Menu mobile déroulant -->
         <div v-if="isMenuOpen" class="md:hidden fixed top-20 left-0 w-full bg-white shadow-lg z-10">
           <div class="flex flex-col items-center py-4">
-            <a class="py-2 cursor-pointer border-b">Projet</a>
-            <a class="py-2 cursor-pointer border-b">Articles</a>
-            <a class="py-2 cursor-pointer border-b">Presta</a>
+            <a class="py-2 cursor-pointer">Projet</a>
+            <a class="py-2 cursor-pointer">Articles</a>
+            <a class="py-2 cursor-pointer">Presta</a>
             <a class="py-2 cursor-pointer">À propos</a>
           </div>
         </div>
 
         <!-- Bouton Contact -->
-        <button class="hidden md:flex py-1 border border-black px-6 rounded-full cursor-pointer justify-center">
+        <button class="hidden md:flex py-1 border border-black px-6 rounded-full cursor-pointer">
           <p>Contact</p>
           <img :src="arrowSvg" alt="">
         </button>
