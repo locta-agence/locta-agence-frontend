@@ -15,7 +15,6 @@
       <button type="submit" class="w-full bg-green-500 text-white p-2 rounded">Ajouter ➕</button>
     </form>
 
-    <!-- Tableau des projets -->
     <table class="w-full max-w-3xl mt-6 bg-white shadow-md rounded-lg overflow-hidden">
       <thead class="bg-gray-200">
         <tr>
@@ -25,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="project in projects" :key="project._id" class="border-b hover:bg-gray-100">
+        <tr v-for="project in paginatedProjects" :key="project._id" class="border-b hover:bg-gray-100">
           <td class="p-3">
             <input v-if="editingId === project._id" v-model="project.name" class="w-full p-1 border rounded" />
             <span v-else>{{ project.name }}</span>
@@ -42,8 +41,15 @@
         </tr>
       </tbody>
     </table>
-
-    <!-- Modal de confirmation pour modification -->
+    <div class="flex justify-center mt-4 space-x-2">
+      <button @click="prevPage" :disabled="currentPage === 1" class="px-4 py-2 bg-gray-300 rounded disabled:opacity-50">
+        ⬅️ 
+      </button>
+      <span class="px-4 py-2">Page {{ currentPage }} / {{ totalPages }}</span>
+      <button @click="nextPage" :disabled="currentPage === totalPages" class="px-4 py-2 bg-gray-300 rounded disabled:opacity-50">
+        ➡️
+      </button>
+    </div>
     <div v-if="showEditModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div class="bg-white p-6 rounded shadow-lg w-96">
         <h3 class="text-lg font-semibold">Confirmer la modification</h3>
@@ -83,6 +89,24 @@ const newProject = ref({ name: "", rating: [] });
 const showEditModal = ref(false);
 const showDeleteModal = ref(false);
 const selectedProject = ref(null);
+const currentPage = ref(1);
+const itemsPerPage = 5;
+
+const paginatedProjects = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return projects.value.slice(start, start + itemsPerPage);
+});
+
+const totalPages = computed(() => Math.ceil(projects.value.length / itemsPerPage));
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) currentPage.value++;
+};
+
+const prevPage = () => {
+  if (currentPage.value > 1) currentPage.value--;
+};
+
 
 onMounted(() => {
   const token = Cookies.get('auth_token');

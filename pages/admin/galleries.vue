@@ -33,7 +33,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="gallery in galleries" :key="gallery._id" class="border-b hover:bg-gray-100">
+        <tr v-for="gallery in paginatedGalleries" :key="gallery._id" class="border-b hover:bg-gray-100">
           <td class="p-3">
             <input v-if="editingId === gallery._id" v-model="gallery.url" class="w-full p-1 border rounded" />
             <span v-else>{{ gallery.url }}</span>
@@ -50,6 +50,15 @@
         </tr>
       </tbody>
     </table>
+    <div class="flex justify-center mt-4 space-x-2">
+      <button @click="prevPage" :disabled="currentPage === 1" class="px-4 py-2 bg-gray-300 rounded disabled:opacity-50">
+        ⬅️ 
+      </button>
+      <span class="px-4 py-2">Page {{ currentPage }} / {{ totalPages }}</span>
+      <button @click="nextPage" :disabled="currentPage === totalPages" class="px-4 py-2 bg-gray-300 rounded disabled:opacity-50">
+        ➡️
+      </button>
+    </div>
   </div>
 </template>
 
@@ -64,6 +73,23 @@ const galleries = ref([]);
 const projects = ref([]);
 const editingId = ref(null);
 const newGallery = ref({ url: "", isVideo: false, idProject: "" });
+const currentPage = ref(1);
+const itemsPerPage = 5;
+
+const paginatedGalleries = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return galleries.value.slice(start, start + itemsPerPage);
+});
+
+const totalPages = computed(() => Math.ceil(projects.value.length / itemsPerPage));
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) currentPage.value++;
+};
+
+const prevPage = () => {
+  if (currentPage.value > 1) currentPage.value--;
+};
 
 onMounted(() => {
   const token = Cookies.get('auth_token');
