@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import { getCategories } from '@/services/apiService';
 
 const activeIndex = ref(null);
 
@@ -7,6 +8,7 @@ const toggleAccordion = (index) => {
     activeIndex.value = activeIndex.value === index ? null : index;
 };
 
+const categories = await getCategories();
 const links = [
     { title: "Création de sites web", description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non excepturi ea dolores velit pariatur ducimus distinctio voluptatem error ad. Nemo voluptas perspiciatis eos cum debitis molestiae quo corrupti est eius." },
     { title: "Direction artistique", description: "artistique" },
@@ -47,7 +49,7 @@ const links = [
     <div class="space-y-20 p-5">
         <h2 class="text-5xl md:text-7xl boogybrut-medium">Nos expertises</h2>
         <div class="h-full pb-5">
-            <div v-for="(item, index) in links" :key="index"
+            <div v-for="(item, index) in categories" :key="index"
                 class="text-xl flex items-center boogybrut-medium border-b py-7">
                 <div>
                     <!-- Accordion Header -->
@@ -56,7 +58,7 @@ const links = [
                         <button @click="toggleAccordion(index)" class="text-xl md:text-3xl"
                             :aria-expanded="activeIndex === index ? 'true' : 'false'"
                             :aria-controls="'accordion-content-' + index">
-                            {{ item.title }}
+                            {{ item.name }}
                         </button>
                     </div>
 
@@ -65,7 +67,7 @@ const links = [
                         class="overflow-hidden transition-all duration-300 ease-in-out w-full"
                         :style="{ maxHeight: activeIndex === index ? '200px' : '0px' }">
                         <p class="mt-10 bg-white border-gray-300 text-md boogybrut-light">
-                            {{ item.description }}
+                            {{ item.desc }}
                         </p>
                     </div>
                 </div>

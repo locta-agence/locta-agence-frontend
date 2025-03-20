@@ -14,7 +14,7 @@
 
       <div class="flex flex-wrap gap-3 mb-10">
         <button
-          v-for="(filter, index) in filters"
+          v-for="(filter, index) in categoriesFilters"
           :key="index"
           :class="[
             'px-4 py-2 text-sm border rounded-full',
@@ -89,17 +89,9 @@
 
 <script setup>
 import { ref } from "vue";
+import { getCategories } from '@/services/apiService';
 
-const filters = ref([
-  { name: "Tout", active: true },
-  { name: "Sites web", active: false },
-  { name: "Direction artistique", active: false },
-  { name: "Photo et vidéo", active: false },
-  { name: "Communication", active: false },
-  { name: "Reportage événement", active: false },
-  { name: "Organisation événement", active: false },
-  { name: "Clips vidéo", active: false },
-]);
+const categoriesFilters = await getCategories();
 
 const projects = ref([
   {

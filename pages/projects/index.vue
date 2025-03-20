@@ -1,8 +1,6 @@
 <template>
   <section class="py-24 bg-white m-2">
-
     <div class="ml-8">
-
       <div class="flex justify-between items-center mb-8">
         <h2 class="text-5xl font-bold text-black">Nos projets</h2>
       </div>
@@ -109,7 +107,7 @@ const selectFilter = (index) => {
 
 <style scoped>
 .project-item {
-  margin-bottom: 80px;
+  margin-bottom: 20px;
 }
 
 .project-content {
