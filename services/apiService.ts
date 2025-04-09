@@ -29,6 +29,6 @@ export const getProjectsByCategory = async (categoryId: number) => {
   return await fetchData(`/projects/categories/${categoryId}`);
 }
 
-export const getGalleries = async (projectId: number) => {
+export const getGalleriesByProject = async (projectId: number) => {
   return await fetchData(`/galleries/projects/${projectId}`);
 }

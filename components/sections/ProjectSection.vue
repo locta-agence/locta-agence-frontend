@@ -90,7 +90,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import { getCategories, getGalleries, getProjectsByCategory } from "@/services/apiService";
+import { getCategories, getGalleriesByProject, getProjectsByCategory } from "@/services/apiService";
 
 const categoriesFilters = ref([]);
 const selectedCategory = ref(null);
@@ -122,13 +122,13 @@ const selectFilter = async (categoryId) => {
     if (!projects.value.length) return;
 
     // image principale
-    const mainGallery = await getGalleries(projects.value[0]._id);
+    const mainGallery = await getGalleriesByProject(projects.value[0]._id);
     gallerie.value = mainGallery[0]?.url || '';
 
     // images des deux projets suivants
     const additionalProjects = projects.value.slice(1, 3);
     for (const project of additionalProjects) {
-      const galleries = await getGalleries(project._id);
+      const galleries = await getGalleriesByProject(project._id);
       extraProjectsImages.value.push({
         image: galleries[0]?.url || '',
         name: project.name

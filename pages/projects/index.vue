@@ -7,102 +7,109 @@
 
       <div class="flex flex-wrap gap-3 mb-10">
         <button
-        v-for="(filter, index) in filters"
+        v-for="(filter, index) in categoriesFilters"
         :key="index"
         :class="[
             'px-4 py-2 text-sm border rounded-full',
-            filter.active
+            selectedCategory === filter._id
             ? 'bg-purple-700 text-white border-purple-700'
               : 'border-gray-300 text-gray-600 hover:border-black hover:text-black',
             ]"
-          @click="selectFilter(index)"
+          @click="selectFilter(filter._id)"
           >
           {{ filter.name }}
         </button>
       </div>
     </div>
       
-      
-    <div class="projects-container">
-      <div
-        v-for="(project, index) in projects"
-        :key="project.id"
-        class="project-item"
-        :class="{
-          'left-aligned': index % 2 === 0,
-          'right-aligned': index % 2 === 1,
-        }"
-      >
-        <div class="project-content">
-          <div class="project-image">
-            <img :src="project.image" alt="Image du projet" />
-            <button class="btn-reaction">Réaction utilisateur</button>
-          </div>
-          <div class="project-info">
-            <div class="project-number">
-              {{ String(index + 1).padStart(2, "0") }}
+    <transition name="fade" mode="out-in">
+      <div class="projects-container" :key="selectedCategory">
+        <div
+          v-for="(project, index) in projects"
+          :key="project.id"
+          class="project-item"
+          :class="{
+            'left-aligned': index % 2 === 0,
+            'right-aligned': index % 2 === 1,
+          }"
+        >
+          <div class="project-content">
+            <div class="project-image">
+              <img :src="gallerie" :alt="project.name" />
+              <button class="btn-reaction">Réaction utilisateur</button>
             </div>
-            <h2 class="project-title">{{ project.title }}</h2>
-            <div class="project-meta">
-              <span>{{ project.location }}</span> |
-              <span>{{ project.date }}</span>
+            <div class="project-info">
+              <div class="project-number">
+                {{ String(index + 1).padStart(2, "0") }}
+              </div>
+              <h2 class="project-title">{{ project.name }}</h2>
+              <div class="project-meta">
+              </div>
+              <p class="project-description">{{ project.description }}</p>
+              <button class="btn-more">En savoir plus →</button>
             </div>
-            <p class="project-description">{{ project.description }}</p>
-            <button class="btn-more">En savoir plus →</button>
           </div>
         </div>
       </div>
-    </div>
+    </transition>
   </section>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, computed } from "vue";
+import { getCategories, getGalleriesByProject, getProjectsByCategory } from "@/services/apiService";
 
-const filters = ref([
-  { name: "Tout", active: true },
-  { name: "Sites web", active: false },
-  { name: "Direction artistique", active: false },
-  { name: "Photo et vidéo", active: false },
-  { name: "Communication", active: false },
-  { name: "Reportage événement", active: false },
-  { name: "Organisation événement", active: false },
-  { name: "Clips vidéo", active: false },
-]);
+const categoriesFilters = ref([]);
+const selectedCategory = ref(null);
+const projects = ref([]);
+const gallerie = ref([]);
+const extraProjectsImages = ref([]);
 
-const projects = ref([
-  {
-    id: 1,
-    title: "Nom du projet",
-    location: "Lieu du projet",
-    date: "Date du projet",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: "https://picsum.photos/800/400?random=1",
-  },
-  {
-    id: 2,
-    title: "Nom du projet",
-    location: "Lieu du projet",
-    date: "Date du projet",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: "https://picsum.photos/800/400?random=2",
-  },
-  {
-    id: 3,
-    title: "Nom du projet",
-    location: "Lieu du projet",
-    date: "Date du projet",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: "https://picsum.photos/800/400?random=3",
-  },
-]);
+onMounted(async () => {
+  try {
+    categoriesFilters.value = await getCategories();
+    if (categoriesFilters.value.length > 0) {
+      selectFilter(categoriesFilters.value[0]._id);
+    }
+  } catch (error) {
+    console.error("Erreur de chargement des catégories", error);
+  }
+});
 
-const selectFilter = (index) => {
-  filters.value.forEach((f, i) => (f.active = i === index));
+const selectFilter = async (categoryId) => {
+  selectedCategory.value = categoryId;
+  projects.value = [];
+  gallerie.value = '';
+  extraProjectsImages.value = [];
+
+  try {
+    const projectList = await getProjectsByCategory(categoryId);
+    projects.value = projectList.reverse();
+
+    if (!projects.value.length) return;
+
+    // image principale
+    const mainGallery = await getGalleriesByProject(projects.value[0]._id);
+    gallerie.value = mainGallery[0]?.url || '';
+
+    // images des deux projets suivants
+    const additionalProjects = projects.value.slice(1, 3);
+    for (const project of additionalProjects) {
+      const galleries = await getGalleriesByProject(project._id);
+      extraProjectsImages.value.push({
+        image: galleries[0]?.url || '',
+        name: project.name
+      });
+    }
+  } catch (error) {
+    console.error("Erreur de chargement des projets", error);
+  }
 };
+
+const selectedCategoryName = computed(() => {
+  const category = categoriesFilters.value.find((cat) => cat._id === selectedCategory.value);
+  return category ? category.name : "Catégorie";
+});
 </script>
 
 <style scoped>
@@ -197,5 +204,11 @@ const selectFilter = (index) => {
   .project-info {
     flex: 0 0 100%;
   }
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
 }
 </style>
