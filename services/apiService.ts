@@ -26,5 +26,9 @@ export const getUsers = async () => {
 };
 
 export const getProjectsByCategory = async (categoryId: number) => {
-  return await fetchData(`/project/categories/${categoryId}`);
+  return await fetchData(`/projects/categories/${categoryId}`);
+}
+
+export const getGalleries = async (projectId: number) => {
+  return await fetchData(`/galleries/projects/${projectId}`);
 }
