@@ -45,10 +45,12 @@
       </div>
     </div>
   </div>
+  <ProjectSection />
 </template>
 
 <script setup>
 import { getProjectById, getCategoryById } from "@/services/apiService";
+import ProjectSection from '~/components/sections/ProjectSection.vue';
 import { useRoute } from "#app";
 
 const route = useRoute();
