@@ -19,20 +19,24 @@
         </div>
       </div>
     </div>
-    <div class="w-full h-full flex mobile flex-col">
-      <div class="flex w-full" style="flex-direction: row; margin-top: 30px;">
-        <h1 style="font-size: 150px;" class="boogybrut-medium"><b>{{ project?.number }}</b></h1>
-        <h1 v-if="project" style="font-size: 30px; margin-top: 130px; margin-left: 20px;" class="boogybrut-medium"><b>{{ project?.name }}</b></h1>
+    <div class="w-full h-full flex mobile flex-col mb-4">
+      <div class="flex w-full" style="margin-top: 80px;">
+        <div style="font-size: 150px; line-height: 110px;" class="boogybrut-medium"><b>{{ project?.number }}</b></div>
+        <div v-if="project" style="font-size: 20px; margin-top: auto; margin-left: 10px;" class="boogybrut-medium"><b>{{ project?.name }}</b></div>
       </div>
-      <div class="h-screen top-2 my-2 w-full locta-bg bg-cover bg-center  rounded-xl mr-6 ml-2"></div>
-      <div class="w-full right-0 flex justify-center">
-        <div class="h-full w-full flex flex-col space-y-28 pr-10">
-          <div style="margin-top: 85px;">
-            <div class="flex" style="justify-content: space-between">
-              <div style="width: fit-content; height: 100%; padding-left: 16px; padding-right: 16px; padding-top: 4px; padding-bottom: 4px; border-radius: 20px; outline: 1px var(--CTA-Primary, #0C0C0C) solid; outline-offset: -1px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; margin-top: 50px;">
-                <div style="color: var(--CTA-Primary, #0C0C0C); font-size: 14px; font-family: Poppins; font-weight: 400; word-wrap: break-word">Catégorie du projet</div>
-              </div>
+      <div class="h-screen top-2 my-2 w-[98%] locta-bg bg-cover bg-center rounded-xl mx-auto flex flex-col justify-end">
+        <div class="flex" style="justify-content: end; position: relative; bottom: 5px; margin-right: 5px;">
+          <div class="bg-white" style="width: fit-content; height: 100%; padding: 4px 16px; border-radius: 20px; outline: 1px var(--CTA-Primary, #0C0C0C) solid; outline-offset: -1px; justify-content: center; align-items: center; gap: 10px; display: inline-flex;">
+            <div style="color: var(--CTA-Primary, #0C0C0C); font-size: 14px; font-family: Poppins; font-weight: 400; overflow-wrap: break-word;">
+              {{ category?.name }}
             </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="w-full right-0 flex justify-center">
+        <div class="h-full w-full flex flex-col space-y-28">
+          <div class="mt-4 mx-4">
             <div style="white-space: pre-line; font-family: Poppins;">
               Contexte et description : {{ project?.description }}
             </div>
@@ -50,17 +54,18 @@ const route = useRoute();
 const projectId = route.params.id; // Récupère l'ID du projet depuis l'URL
 
 const { data: project, pending, error } = useFetch(`http://localhost:3001/api/projects/${projectId}`);
-console.log(project);
+const { data: category, pending: loadingCategory, error: errorCategory } = useFetch(() => {
+  if (project.value && project.value.idCategory) {
+    const categoryId =
+      typeof project.value.idCategory === 'string'
+        ? project.value.idCategory
+        : project.value.idCategory.$oid || project.value.idCategory._id
 
-const links = [
-  { title: "Creation de sites web", link: "" },
-  { title: "Direction artistique", link: "" },
-  { title: "Captation photo et video", link: "" },
-  { title: "Communication", link: "" },
-  { title: "Reportage evenement", link: "" },
-  { title: "Organisation evénement", link: "" },
-  { title: "Clips vidéo", link: "" },
-];
+    return `http://localhost:3001/api/categories/${categoryId}`
+  }
+  return null
+})
+console.log(category.value);
 </script>
 
 
