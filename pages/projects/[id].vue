@@ -48,24 +48,24 @@
 </template>
 
 <script setup>
-import { useRoute, useFetch } from "#app";
+import { getProjectById, getCategoryById } from "@/services/apiService";
+import { useRoute } from "#app";
 
 const route = useRoute();
-const projectId = route.params.id; // Récupère l'ID du projet depuis l'URL
+const projectId = route.params.id;
+const project = ref(null);
+const category = ref(null);
 
-const { data: project, pending, error } = useFetch(`http://localhost:3001/api/projects/${projectId}`);
-const { data: category, pending: loadingCategory, error: errorCategory } = useFetch(() => {
-  if (project.value && project.value.idCategory) {
-    const categoryId =
-      typeof project.value.idCategory === 'string'
-        ? project.value.idCategory
-        : project.value.idCategory.$oid || project.value.idCategory._id
-
-    return `http://localhost:3001/api/categories/${categoryId}`
+onMounted(async () => {
+  try {
+    project.value = await getProjectById(projectId);
+    if (project.value.idCategory) {
+      category.value = await getCategoryById(project.value.idCategory._id);
+    }
+  } catch (error) {
+    console.error("Erreur de chargement du projet", error);
   }
-  return null
-})
-console.log(category.value);
+});
 </script>
 
 
