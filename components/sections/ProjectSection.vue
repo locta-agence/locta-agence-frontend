@@ -27,66 +27,65 @@
       </div>
 
       <!-- PROJET PRINCIPAL -->
-      <div v-if="projects.length > 0" class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <!-- IMAGE PRINCIPALE -->
-        <div class="relative overflow-hidden rounded-xl main-image cursor-pointer" @click="navigateTo(`/projects/${projects[0]._id}`)">
-          <img
-            :src="gallerie"
-            :alt="projects[0].name"
-            class="w-full max-h-xxl object-cover rounded-tl-xl"
-          />
-          <div class="image-label right-0 bottom-0">
-            <span>{{ projects[0].name.substring(0, 20) }}...</span>
-            <img src="/assets/images/label.svg" alt="Label" />
+      <transition name="fade" mode="out-in">
+        <div v-if="projects.length > 0" class="grid grid-cols-1 lg:grid-cols-2 gap-10 ">
+          <!-- IMAGE PRINCIPALE -->
+          <div class="relative overflow-hidden rounded-xl main-image cursor-pointer" @click="navigateTo(`/projects/${projects[0]._id}`)">
+            <img
+              :src="gallerie"
+              :alt="projects[0].name"
+              class="w-full max-h-xxl object-cover rounded-tl-xl"
+            />
+            <div class="image-label right-0 bottom-0">
+              <span>{{ projects[0].name.substring(0, 20) }}...</span>
+              <img src="/assets/images/label.svg" alt="Label" />
+            </div>
           </div>
-        </div>
-
-        <!-- DÉTAILS DU PROJET -->
-        <div class="flex flex-col">
-          <div class="mb-4 mt-auto flex items-center justify-between">
-            <h3 class="text-4xl font-bold text-black mb-2">
-              {{ projects[0].number }}
-            </h3>
-            <span class="px-4 py-2 text-sm rounded-full border border-purple-700 text-purple-700">
-              {{ selectedCategoryName }}
-            </span>
-          </div>
-
-          <h2 class="text-4xl font-bold text-black mb-4">
-            {{ projects[0].name }}
-          </h2>
-
-          <p class="text-black mb-10">
-            {{ projects[0].description }}
-          </p>
-
-          <!-- Autres projets -->
-          <div class="grid grid-cols-2 gap-4 mt-auto">
-            <div
-              v-for="(project, idx) in extraProjectsImages"
-              :key="idx"
-              class="relative overflow-hidden rounded-xl cursor-pointer"
-              @click="navigateTo(`/projects/${project.id}`)"
-            >
-              <img
-                :src="project.image"
-                alt="Miniature"
-                class="w-full h-full object-cover aspect-[1/1.2]"
-              />
-              <div class="image-label-small left-0">
-                <span>{{ project.name.substring(0, 20) }}...</span>
-                <img src="/assets/images/label-left.svg" alt="Label" />
+  
+          <!-- DÉTAILS DU PROJET -->
+          <div class="flex flex-col">
+            <div class="mb-4 mt-auto flex items-center justify-between">
+              <h3 class="text-4xl font-bold text-black mb-2">
+                {{ projects[0].number }}
+              </h3>
+              <span class="px-4 py-2 text-sm rounded-full border border-purple-700 text-purple-700">
+                {{ selectedCategoryName }}
+              </span>
+            </div>
+  
+            <h2 class="text-4xl font-bold text-black mb-4">
+              {{ projects[0].name }}
+            </h2>
+  
+            <p class="text-black mb-10">
+              {{ projects[0].description }}
+            </p>
+  
+            <!-- Autres projets -->
+            <div class="grid grid-cols-2 gap-4 mt-auto container-projects">
+              <div
+                v-for="(project, idx) in extraProjectsImages"
+                :key="idx"
+                class="relative overflow-hidden rounded-xl cursor-pointer"
+                @click="navigateTo(`/projects/${project.id}`)"
+              >
+                <img
+                  :src="project.image"
+                  alt="Miniature"
+                  class="w-full h-full object-cover aspect-[1/1.2]"
+                />
+                <div class="image-label-small left-0">
+                  <span>{{ project.name.substring(0, 20) }}...</span>
+                  <img src="/assets/images/label-left.svg" alt="Label" />
+                </div>
               </div>
             </div>
           </div>
-
-          
-
         </div>
-      </div>
-
-      <!-- MESSAGE SI PAS DE PROJETS -->
-      <div v-else class="text-center text-gray-500">Aucun projet disponible pour cette catégorie.</div>
+  
+        <!-- MESSAGE SI PAS DE PROJETS -->
+        <div v-else class="text-center text-gray-500">Aucun projet disponible pour cette catégorie.</div>
+      </transition>
     </div>
   </section>
 </template>
@@ -190,5 +189,14 @@ const selectedCategoryName = computed(() => {
   object-fit: cover;
   z-index: -1;
   pointer-events: none;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+.container-projects{
+  max-width: 60vh;
 }
 </style>
