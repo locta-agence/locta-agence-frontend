@@ -48,10 +48,10 @@ onMounted(() => {
 <template>
   <header>
     <!-- Logo -->
-    <img ref="logo" class="fixed z-10 invert md:invert-0" :src="logoSvg" alt="">
+    <img ref="logo" class="fixed z-20 invert md:invert-0" :src="logoSvg" alt="">
 
     <!-- Navigation -->
-    <nav class="w-full flex fixed h-20">
+    <nav class="w-full flex fixed h-20 z-10 sm:z-0">
       <div class="w-[50%] bg-white"></div>
       
       <!-- Contenu de la navigation (Menu desktop) -->
@@ -75,7 +75,7 @@ onMounted(() => {
         </div>
 
         <!-- Menu mobile déroulant -->
-        <div v-if="isMenuOpen" class="md:hidden fixed top-20 left-0 w-full bg-white shadow-lg z-10">
+        <div v-if="isMenuOpen" class="md:hidden fixed top-20 left-0 w-full bg-white shadow-lg z-20">
           <div class="flex flex-col items-center py-4">
             <a class="py-2 cursor-pointer border-b">Projet</a>
             <a class="py-2 cursor-pointer border-b">Articles</a>
