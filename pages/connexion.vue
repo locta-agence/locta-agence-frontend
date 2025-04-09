@@ -49,7 +49,8 @@
         throw new Error(data.message);
       }
       
-      Cookies.set('auth_token', data.token, { secure: true, sameSite: 'Strict', expires: 1 });
+      Cookies.set('auth_token', data.token, { secure: true, sameSite: 'Strict', expires: 1 / 96 });
+
       router.push('/admin/projects');
     } catch (error) {
       errorMessage.value = error.message;
