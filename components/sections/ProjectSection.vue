@@ -60,24 +60,26 @@
             {{ projects[0].description }}
           </p>
 
-          <!-- AUTRES PROJETS -->
-<div class="grid grid-cols-2 gap-4 mt-auto">
-  <div
-    v-for="(project, idx) in extraProjectsImages"
-    :key="idx"
-    class="relative overflow-hidden rounded-xl"
-  >
-    <img
-      :src="project.image"
-      :alt="project.name"
-      class="w-full h-full object-cover aspect-[1/1.2]"
-    />
-    <div class="image-label-small left-0 bottom-0">
-      <span class="truncate max-w-[90%] block">{{ project.name }}</span>
-      <img src="/assets/images/label-left.svg" alt="Label" />
-    </div>
-  </div>
-</div>
+          <!-- Autres projets -->
+          <div class="grid grid-cols-2 gap-4 mt-auto">
+            <div
+               v-for="(project, idx) in extraProjectsImages"
+              :key="idx"
+              class="relative overflow-hidden rounded-xl"
+            >
+              <img
+                :src="project.image"
+                alt="Miniature"
+                class="w-full h-full object-cover aspect-[1/1.2]"
+              />
+              <div class="image-label-small left-0">
+                <span>{{ project.name.substring(0, 20) }}...</span>
+                <img src="/assets/images/label-left.svg" alt="Label" />
+              </div>
+            </div>
+          </div>
+
+          
 
         </div>
       </div>

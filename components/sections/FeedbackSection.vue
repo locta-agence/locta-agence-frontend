@@ -31,9 +31,9 @@
 
 <script setup>
 const reviews = [
-  { image: '/images/review1.jpg', name: 'Nom XXXXXXXX' },
-  { image: '/images/review2.jpg', name: 'Nom XXXXXXXX' },
-  { image: '/images/review3.jpg', name: 'Nom XXXXXXXX' },
+  { image: 'https://picsum.photos/500/700?random=525', name: 'Nom XXXXXXXX' },
+  { image: 'https://picsum.photos/500/700?random=522', name: 'Nom XXXXXXXX' },
+  { image: 'https://picsum.photos/500/700?random=521', name: 'Nom XXXXXXXX' },
 ];
 </script>
 
