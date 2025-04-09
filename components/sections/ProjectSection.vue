@@ -29,7 +29,7 @@
       <!-- PROJET PRINCIPAL -->
       <div v-if="projects.length > 0" class="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <!-- IMAGE PRINCIPALE -->
-        <div class="relative overflow-hidden rounded-xl main-image">
+        <div class="relative overflow-hidden rounded-xl main-image cursor-pointer" @click="navigateTo(`/projects/${projects[0]._id}`)">
           <img
             :src="gallerie"
             :alt="projects[0].name"
@@ -60,24 +60,27 @@
             {{ projects[0].description }}
           </p>
 
-          <!-- AUTRES PROJETS -->
-<div class="grid grid-cols-2 gap-4 mt-auto">
-  <div
-    v-for="(project, idx) in extraProjectsImages"
-    :key="idx"
-    class="relative overflow-hidden rounded-xl"
-  >
-    <img
-      :src="project.image"
-      :alt="project.name"
-      class="w-full h-full object-cover aspect-[1/1.2]"
-    />
-    <div class="image-label-small left-0 bottom-0">
-      <span class="truncate max-w-[90%] block">{{ project.name }}</span>
-      <img src="/assets/images/label-left.svg" alt="Label" />
-    </div>
-  </div>
-</div>
+          <!-- Autres projets -->
+          <div class="grid grid-cols-2 gap-4 mt-auto">
+            <div
+              v-for="(project, idx) in extraProjectsImages"
+              :key="idx"
+              class="relative overflow-hidden rounded-xl cursor-pointer"
+              @click="navigateTo(`/projects/${project.id}`)"
+            >
+              <img
+                :src="project.image"
+                alt="Miniature"
+                class="w-full h-full object-cover aspect-[1/1.2]"
+              />
+              <div class="image-label-small left-0">
+                <span>{{ project.name.substring(0, 20) }}...</span>
+                <img src="/assets/images/label-left.svg" alt="Label" />
+              </div>
+            </div>
+          </div>
+
+          
 
         </div>
       </div>
@@ -130,6 +133,7 @@ const selectFilter = async (categoryId) => {
     for (const project of additionalProjects) {
       const galleries = await getGalleriesByProject(project._id);
       extraProjectsImages.value.push({
+        id: project._id,
         image: galleries[0]?.url || '',
         name: project.name
       });

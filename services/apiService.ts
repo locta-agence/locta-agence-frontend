@@ -17,8 +17,16 @@ export const getCategories = async () => {
   return await fetchData('/categories');
 };
 
+export const getCategoryById = async (categoryId: number) => {
+  return await fetchData(`/categories/${categoryId}`);
+}
+
 export const getProjects = async () => {
   return await fetchData('/projects');
+};
+
+export const getProjectById = async (projectId: number) => {
+  return await fetchData(`/projects/${projectId}`);
 };
 
 export const getUsers = async () => {
