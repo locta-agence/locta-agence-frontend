@@ -29,7 +29,7 @@
       <!-- PROJET PRINCIPAL -->
       <div v-if="projects.length > 0" class="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <!-- IMAGE PRINCIPALE -->
-        <div class="relative overflow-hidden rounded-xl main-image">
+        <div class="relative overflow-hidden rounded-xl main-image cursor-pointer" @click="navigateTo(`/projects/${projects[0]._id}`)">
           <img
             :src="gallerie"
             :alt="projects[0].name"
@@ -63,9 +63,10 @@
           <!-- Autres projets -->
           <div class="grid grid-cols-2 gap-4 mt-auto">
             <div
-               v-for="(project, idx) in extraProjectsImages"
+              v-for="(project, idx) in extraProjectsImages"
               :key="idx"
-              class="relative overflow-hidden rounded-xl"
+              class="relative overflow-hidden rounded-xl cursor-pointer"
+              @click="navigateTo(`/projects/${project.id}`)"
             >
               <img
                 :src="project.image"
@@ -132,6 +133,7 @@ const selectFilter = async (categoryId) => {
     for (const project of additionalProjects) {
       const galleries = await getGalleries(project._id);
       extraProjectsImages.value.push({
+        id: project._id,
         image: galleries[0]?.url || '',
         name: project.name
       });
