@@ -46,7 +46,7 @@
               <div class="project-meta">
               </div>
               <p class="project-description">{{ project.description }}</p>
-              <button class="btn-more">En savoir plus →</button>
+              <button class="btn-more" @click="navigateTo(`/projects/${project._id}`)">En savoir plus →</button>
             </div>
           </div>
         </div>

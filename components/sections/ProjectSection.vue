@@ -4,7 +4,7 @@
       <!-- HEADER -->
       <div class="flex justify-between items-center mb-8">
         <h2 class="text-5xl font-bold text-black">Nos derniers projets</h2>
-        <a href="#" class="text-black text-sm flex items-center hover:underline">
+        <a @click="navigateTo(`/projects`)" class="text-black text-sm flex items-center hover:underline cursor-pointer">
           Tout voir <span class="ml-1">↘</span>
         </a>
       </div>
