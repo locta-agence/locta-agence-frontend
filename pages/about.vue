@@ -16,8 +16,7 @@ import locta from '../public/images/LOCTA.png'
     <div class="container mx-auto px-4 md:py-8 w-[85%]">
       <div class="container mx-auto py-8 w-full mb-8">
       <blockquote class="text-xl md:text-5xl font-bold italic w-full mx-auto">
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed od tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim a"
+        "Créeer et inspirer"
       </blockquote>
     </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
@@ -29,11 +28,9 @@ import locta from '../public/images/LOCTA.png'
           </div>
           <div class="container mx-auto">
             <p class="max-w-4xl text-base leading-relaxed font-normal mt-8 text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-              ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum.
+              Chez Locta, l’accessibilité est au cœur de tout ce que nous faisons. Que ce soit pour nos prestataires ou notre communauté, nous voulons créer un espace de confiance, sans jugement, où chacun peut s’exprimer librement.
+              <br/>
+              Notre mission ? Mettre en avant les talents créatifs, favoriser le partage de connaissances et d’expériences, et inspirer l’innovation. En valorisant les créateurs, nous encourageons la créativité et le développement personnel de tous.
             </p>
           </div>
         </div>
@@ -43,22 +40,9 @@ import locta from '../public/images/LOCTA.png'
           <h2 class="text-4xl font-bold mb-5">Qui sommes nous ?</h2>
           <div class="space-y-8">
             <p class="text-base leading-relaxed font-normal text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum.
+              Locta a été créé en 2023 par Deregard Franck, Desgranges Emeric, Poncet Emma et Clairotte Florent.
+              Le nom “Locta”, abrégé de “Local Talent”, représente le cœur même du concept de l’association, par le rassemblement d’une communauté qui est le plus souvent derrière les caméras. Cette abréviation s’illustre à ce jour dans notre concept-phare du même nom qui vise à mettre en avant les talents émergents de la région Auvergne-Rhône-Alpes. Nous visons une cible jeune lyonnaise puis française qui aime la culture. L’identité de Locta se retranscrit dans la création, elle est délibérément créative et variée pour inspirer sa communauté. On a commencé par s’orienter sur la culture urbaine avant d’élargir notre cible vers la culture de manière générale.
             </p>
-            <p class="text-base leading-relaxed font-normal text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-
             <!-- "L'équipe" button -->
             <div class="mt-12 flex justify-start">
               <button
