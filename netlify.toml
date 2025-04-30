@@ -1,6 +1,10 @@
 [build]
-	publish = "dist"
-	command = "npm ci && npm run build"
+    command = "pnpm install --no-frozen-lockfile && pnpm run build"
+    publish = "dist"
+
+[dev]
+    command = "npm run dev"
+    targetPort = 3000
 
 [[redirects]]
 	from = "/*"
