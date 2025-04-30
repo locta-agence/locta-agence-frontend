@@ -8,7 +8,7 @@
             <div class="flex" style="justify-content: space-between">
               <h1 style="font-size: 150px;" class="boogybrut-medium"><b>{{ project?.number }}</b></h1>
               <div style="width: fit-content; height: 100%; padding-left: 16px; padding-right: 16px; padding-top: 4px; padding-bottom: 4px; border-radius: 20px; outline: 1px var(--CTA-Primary, #0C0C0C) solid; outline-offset: -1px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; margin-top: 50px;">
-                <div style="color: var(--CTA-Primary, #0C0C0C); font-size: 14px; font-family: Poppins; font-weight: 400; word-wrap: break-word">Catégorie du projet</div>
+                <div style="color: var(--CTA-Primary, #0C0C0C); font-size: 14px; font-family: Poppins; font-weight: 400; word-wrap: break-word">{{ category?.name }}</div>
               </div>
             </div>
             <h1 v-if="project" style="margin-top: -30px; font-size: 30px" class="boogybrut-medium"><b>{{ project?.name }}</b></h1>
