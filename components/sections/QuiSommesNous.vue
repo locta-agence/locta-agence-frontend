@@ -10,22 +10,16 @@
       </h1>
 
       <!-- Contenu Texte -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-        <p class="text-gray-700 text-lg leading-relaxed">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-        <p class="text-gray-700 text-lg leading-relaxed">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+      <div class="mb-5">
+        <p class="text-justify text-gray-700 text-lg leading-relaxed w-[60%] m-auto">
+          Nous t’aidons à développer ton projet à travers trois pôles d’expertise complémentaires :<br/>
+          Création & direction artistique (sites web, identité visuelle, captation photo et vidéo).<br/>
+          Communication & stratégie (gestion des réseaux sociaux, branding, relations presse).<br/>
+          Événementiel & production (organisation et reportage d’événements, réalisation de clips vidéo).<br/>
+          Passionnés par la culture sous toutes ses formes, nous concevons des stratégies sur-mesure pour valoriser ton art et amplifier ton impact.<br/>
+          Prêt à faire passer ton projet au niveau supérieur ?<br/><br/>
+
+          <div class="m-auto">CRÉER ET INSPIRER</div>
         </p>
       </div>
 
