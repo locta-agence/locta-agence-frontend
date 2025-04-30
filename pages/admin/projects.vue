@@ -91,6 +91,7 @@ const showDeleteModal = ref(false);
 const selectedProject = ref(null);
 const currentPage = ref(1);
 const itemsPerPage = 5;
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const paginatedProjects = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
@@ -117,7 +118,7 @@ onMounted(() => {
 
 const fetchProjects = async () => {
   try {
-    const res = await fetch("http://localhost:3001/api/projects");
+    const res = await fetch(apiUrl + "/projects");
     projects.value = await res.json();
   } catch (error) {
     console.error("Erreur lors du chargement des projets :", error);
@@ -126,7 +127,7 @@ const fetchProjects = async () => {
 
 const addProject = async () => {
   try {
-    const res = await fetch("http://localhost:3001/api/projects", {
+    const res = await fetch(apiUrl + "/projects", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newProject.value),
@@ -145,7 +146,7 @@ const confirmSave = (project) => {
 
 const saveProject = async (project) => {
   try {
-    await fetch(`http://localhost:3001/api/projects/${project._id}`, {
+    await fetch(apiUrl + `/projects/${project._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(project),
@@ -164,7 +165,7 @@ const confirmDelete = (project) => {
 
 const deleteProject = async (id) => {
   try {
-    await fetch(`http://localhost:3001/api/projects/${id}`, { method: "DELETE" });
+    await fetch(apiUrl + `/projects/${id}`, { method: "DELETE" });
     projects.value = projects.value.filter((p) => p._id !== id);
     showDeleteModal.value = false;
   } catch (error) {

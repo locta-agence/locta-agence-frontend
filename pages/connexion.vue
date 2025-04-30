@@ -27,6 +27,7 @@
   const password = ref('');
   const errorMessage = ref('');
   const router = useRouter();
+  const apiUrl = import.meta.env.VITE_API_URL
 
   onMounted(() => {
   const token = Cookies.get('auth_token');
@@ -37,7 +38,7 @@
   
   const login = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/auth/login', {
+      const res = await fetch(apiUrl + '/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name.value, password: password.value })

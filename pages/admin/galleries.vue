@@ -75,6 +75,7 @@ const editingId = ref(null);
 const newGallery = ref({ url: "", isVideo: false, idProject: "" });
 const currentPage = ref(1);
 const itemsPerPage = 5;
+const apiUrl = import.meta.env.VITE_API_URL
 
 const paginatedGalleries = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
@@ -100,7 +101,7 @@ onMounted(() => {
 
 const fetchProjects = async () => {
   try {
-    const res = await fetch("http://localhost:3001/api/projects");
+    const res = await fetch(apiUrl + "/projects");
     projects.value = await res.json();
   } catch (error) {
     console.error("Erreur lors du chargement des projets :", error);
@@ -109,7 +110,7 @@ const fetchProjects = async () => {
 
 const fetchGalleries = async () => {
   try {
-    const res = await fetch("http://localhost:3001/api/galleries");
+    const res = await fetch(apiUrl + "/galleries");
     galleries.value = await res.json();
   } catch (error) {
     console.error("Erreur lors du chargement des galeries :", error);
@@ -118,7 +119,7 @@ const fetchGalleries = async () => {
 
 const addGallery = async () => {
   try {
-    const res = await fetch("http://localhost:3001/api/galleries", {
+    const res = await fetch(apiUrl + "/galleries", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newGallery.value),
@@ -132,7 +133,7 @@ const addGallery = async () => {
 
 const saveGallery = async (gallery) => {
   try {
-    await fetch(`http://localhost:3001/api/galleries/${gallery._id}`, {
+    await fetch(apiUrl + `/galleries/${gallery._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(gallery),
@@ -145,7 +146,7 @@ const saveGallery = async (gallery) => {
 
 const deleteGallery = async (id) => {
   try {
-    await fetch(`http://localhost:3001/api/galleries/${id}`, { method: "DELETE" });
+    await fetch(apiUrl + `/galleries/${id}`, { method: "DELETE" });
     galleries.value = galleries.value.filter((g) => g._id !== id);
   } catch (error) {
     console.error("Erreur lors de la suppression de la galerie :", error);
