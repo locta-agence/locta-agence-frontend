@@ -13,7 +13,7 @@ const scrollPosition = ref(0)
 // Détermine si le logo doit être inversé (noir) en fonction de la page et du défilement
 const shouldInvertLogo = computed(() => {
   // Sur les autres pages que l'accueil, toujours inversé (noir)
-  if (route.path !== '/' && route.path !== '') {
+  if (route.path !== '/' && route.path !== '' && route.path !== '/contact') {
     return true
   }
   
@@ -109,15 +109,16 @@ onMounted(() => {
           <div class="flex flex-col items-center py-4">
             <a class="py-2 cursor-pointer border-b" @click="navigateTo(`/projects`)">Projet</a>
             <NuxtLink to="/prestations" class="py-2 cursor-pointer border-b">Presta</NuxtLink>
-            <NuxtLink to="/about" class="py-2 cursor-pointer">À propos</NuxtLink>
+            <NuxtLink to="/about" class="py-2 cursor-pointer border-b">À propos</NuxtLink>
+            <NuxtLink to="/contact" class="py-2 cursor-pointer">Contact</NuxtLink>
           </div>
         </div>
 
         <!-- Bouton Contact -->
-        <button class="hidden md:flex py-1 border border-black px-6 rounded-full cursor-pointer justify-center">
+        <NuxtLink to="/contact" class="hidden md:flex py-1 border border-black px-6 rounded-full cursor-pointer justify-center">
           <p>Contact</p>
           <img :src="arrowSvg" alt="Contact">
-        </button>
+        </NuxtLink>
       </div>
     </nav>
   </header>
