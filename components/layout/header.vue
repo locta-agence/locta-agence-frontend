@@ -100,7 +100,7 @@ onMounted(() => {
         <!-- Menu desktop (visible sur écrans larges) -->
         <div class="hidden w-full items-center py-2 px-4 space-x-8 ml-8 md:flex">
           <a class="cursor-pointer" @click="navigateTo(`/projects`)">Projet</a>
-          <a class="cursor-pointer">Presta</a>
+          <NuxtLink to="/prestations" class="cursor-pointer">Presta</NuxtLink>
           <NuxtLink to="/about" class="cursor-pointer">À propos</NuxtLink>
         </div>
 
@@ -108,7 +108,7 @@ onMounted(() => {
         <div v-if="isMenuOpen" class="md:hidden fixed top-20 left-0 w-full bg-white shadow-lg z-20">
           <div class="flex flex-col items-center py-4">
             <a class="py-2 cursor-pointer border-b" @click="navigateTo(`/projects`)">Projet</a>
-            <a class="py-2 cursor-pointer border-b">Presta</a>
+            <NuxtLink to="/prestations" class="py-2 cursor-pointer border-b">Presta</NuxtLink>
             <NuxtLink to="/about" class="py-2 cursor-pointer">À propos</NuxtLink>
           </div>
         </div>
