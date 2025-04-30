@@ -2,7 +2,7 @@
 import arrowSvg from '../../assets/images/guidance_up-arrow.svg'
 import logoSvg from '../../assets/images/logo-locta.svg'
 
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 const logo = ref(null)
 
 const isMenuOpen = ref(false);  // Gère l'état du menu déroulant
@@ -48,7 +48,9 @@ onMounted(() => {
 <template>
   <header>
     <!-- Logo -->
-    <img ref="logo" class="fixed z-20 invert md:invert-0 cursor-pointer" :src="logoSvg" alt="" @click="navigateTo(`/`)">
+    <NuxtLink to="/">
+      <img ref="logo" class="fixed z-20 invert md:invert-0" :src="logoSvg" alt="">
+    </NuxtLink>
 
     <!-- Navigation -->
     <nav class="w-full flex fixed h-20 z-10 sm:z-0">
@@ -70,7 +72,7 @@ onMounted(() => {
         <div class="hidden w-full items-center py-2 px-4 space-x-8 ml-8 md:flex">
           <a class="cursor-pointer" @click="navigateTo(`/projects`)">Projet</a>
           <a class="cursor-pointer">Presta</a>
-          <a class="cursor-pointer">À propos</a>
+          <NuxtLink to="/about" class="cursor-pointer">À propos</NuxtLink>
         </div>
 
         <!-- Menu mobile déroulant -->
@@ -78,7 +80,7 @@ onMounted(() => {
           <div class="flex flex-col items-center py-4">
             <a class="py-2 cursor-pointer border-b" @click="navigateTo(`/projects`)">Projet</a>
             <a class="py-2 cursor-pointer border-b">Presta</a>
-            <a class="py-2 cursor-pointer">À propos</a>
+            <NuxtLink to="/about" class="py-2 cursor-pointer">À propos</NuxtLink>
           </div>
         </div>
 
