@@ -2,37 +2,66 @@
 import arrowSvg from '../../assets/images/guidance_up-arrow.svg'
 import logoSvg from '../../assets/images/logo-locta.svg'
 
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
+const route = useRoute()
+
 const logo = ref(null)
+const windowWidth = ref(0)
+const isMenuOpen = ref(false)
+const scrollPosition = ref(0)
 
-const isMenuOpen = ref(false);  // Gère l'état du menu déroulant
-
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;  // Basculer l'état du menu
-};
-
-onMounted(() => {
-  const windowWidth = ref(window.innerWidth)    
-  document.onscroll = function () {
-    let invertIndex = 38
-    let pos = getVerticalScrollPercentage(document.body)
-    if(windowWidth.value < '1000') invertIndex = -10
-
-    if (logo.value) {
-      if (pos >= invertIndex) {
-        logo.value.style.filter = "invert(1)";
-      } else {
-        logo.value.style.filter = "invert(0)";
-      }
-    }
+// Détermine si le logo doit être inversé (noir) en fonction de la page et du défilement
+const shouldInvertLogo = computed(() => {
+  // Sur les autres pages que l'accueil, toujours inversé (noir)
+  if (route.path !== '/' && route.path !== '') {
+    return true
   }
+  
+  // Sur la page d'accueil, dépend du défilement
+  const invertIndex = windowWidth.value < 1000 ? -10 : 38
+  return scrollPosition.value >= invertIndex
+})
 
-  function getVerticalScrollPercentage(elm) {
-    var p = elm.parentNode
-    return (elm.scrollTop || p.scrollTop) / (p.scrollHeight - p.clientHeight) * 100
+// Met à jour le filtre du logo quand shouldInvertLogo change
+watch(shouldInvertLogo, (newValue) => {
+  if (logo.value) {
+    logo.value.style.filter = newValue ? "invert(1)" : "invert(0)"
   }
 })
 
+// Bascule l'état du menu
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value
+}
+
+// Calcule le pourcentage de défilement vertical
+const getVerticalScrollPercentage = (elm) => {
+  const p = elm.parentNode
+  return (elm.scrollTop || p.scrollTop) / (p.scrollHeight - p.clientHeight) * 100
+}
+
+// Gère l'événement de défilement
+const handleScroll = () => {
+  scrollPosition.value = getVerticalScrollPercentage(document.body)
+}
+
+onMounted(() => {
+  // Initialiser la largeur de la fenêtre
+  windowWidth.value = window.innerWidth
+  
+  // Ajouter l'écouteur d'événement pour le défilement
+  document.onscroll = handleScroll
+  
+  // Initialiser l'état du logo en fonction de la route actuelle
+  if (logo.value) {
+    logo.value.style.filter = shouldInvertLogo.value ? "invert(1)" : "invert(0)"
+  }
+  
+  // Mettre à jour la largeur de la fenêtre lors du redimensionnement
+  window.addEventListener('resize', () => {
+    windowWidth.value = window.innerWidth
+  })
+})
 </script>
 
 <style>
@@ -49,7 +78,7 @@ onMounted(() => {
   <header>
     <!-- Logo -->
     <NuxtLink to="/">
-      <img ref="logo" class="fixed z-20 invert md:invert-0" :src="logoSvg" alt="">
+      <img ref="logo" class="fixed z-20 invert md:invert-0" :src="logoSvg" alt="LOCTA">
     </NuxtLink>
 
     <!-- Navigation -->
@@ -64,7 +93,7 @@ onMounted(() => {
           <!-- Ici, tu peux utiliser une icône ou du texte comme bouton -->
           <button @click="toggleMenu" class="md:hidden flex py-1 border border-black px-6 rounded-full cursor-pointer justify-center">
             <p>Menu</p>
-            <img :src="arrowSvg" alt="">
+            <img :src="arrowSvg" alt="Menu">
           </button>
         </div>
 
@@ -87,7 +116,7 @@ onMounted(() => {
         <!-- Bouton Contact -->
         <button class="hidden md:flex py-1 border border-black px-6 rounded-full cursor-pointer justify-center">
           <p>Contact</p>
-          <img :src="arrowSvg" alt="">
+          <img :src="arrowSvg" alt="Contact">
         </button>
       </div>
     </nav>

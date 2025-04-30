@@ -1,10 +1,15 @@
+<script setup>
+import Carousel from '../components/carousel.vue';
+import locta from '../public/images/LOCTA.png'
+</script>
+
 <template>
   <div class="about-page mb-10">
     <!-- Main title section -->
     <div class="container mx-auto px-4 py-24 md:py-32">
-      <img class="rounded-lg w-full object-cover" src="/public/images/locta.png" alt="">
-      <img class="rounded-lg w-full object-cover" src="/public/images/locta.png" alt="">
-      <img class="rounded-lg w-full object-cover" src="/public/images/locta.png" alt="">
+      <img class="rounded-lg w-full object-cover" :src="locta" alt="">
+      <img class="rounded-lg w-full object-cover" :src="locta" alt="">
+      <img class="rounded-lg w-full object-cover" :src="locta" alt="">
     </div>
 
     <!-- Who we are section -->
