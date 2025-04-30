@@ -16,9 +16,9 @@
 
 <script setup>
 const stats = [
-  { value: "2021", label: "Création de l’agence" },
+  { value: "2023", label: "Création de l’agence" },
   { value: "24", label: "Membres de l’agence" },
-  { value: "10", label: "Projets réalisés" },
-  { value: "5K", label: "Personnes nous suivent" },
+  { value: "2", label: "Projets réalisés" },
+  { value: "1", label: "Événement" },
 ];
 </script>
