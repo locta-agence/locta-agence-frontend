@@ -6,10 +6,16 @@
         <p class="text-lg">{{ stat.label }}</p>
       </div>
     </div>
-    <p class="mt-8 text-center text-gray-300 max-w-2xl mx-auto">
-      Lorem ipsum dolor sit amet consectetur. Pharetra odio sed suspendisse facilisis sed cras vitae 
-      maecenas proin. Commodo vulputate nec id bibendum feugiat amet duis. Facilisis dolor quam egestas 
-      aenean amet aliquet arcu iaculis. Sit arcu at pulvinar interdum nisl cursus egestas.
+    <p class="mt-8 text-justify text-gray-300 max-w-2xl mx-auto">
+      Bienvenue chez Locta, l’agence qui met son savoir-faire au service de la culture et des artistes émergents. Ancrée à Lyon, nous accompagnons celles et ceux qui façonnent la culture: musiciens, danseurs, street artists, designers, photographes…<br>
+      Nous t’aidons à développer ton projet à travers trois pôles d’expertise complémentaires :<br>
+      Création & direction artistique (sites web, identité visuelle, captation photo et vidéo).<br>
+      Communication & stratégie (gestion des réseaux sociaux, branding, relations presse).<br>
+      Événementiel & production (organisation et reportage d’événements, réalisation de clips vidéo).<br>
+      Passionnés par la culture sous toutes ses formes, nous concevons des stratégies sur-mesure pour valoriser ton art et amplifier ton impact.<br>
+      Prêt à faire passer ton projet au niveau supérieur ?
+
+      CRÉER ET INSPIRER
     </p>
   </section>
 </template>
